@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en-au">
+  <head>
+    <title>Jetpack</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="favicon-48x48.png" sizes="48x48">
+    <link rel="icon" type="image/png" href="favicon-180x180.png" sizes="180x180">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="center">
+      Fan art, in the form of interactive web graphics, based on the characters of retro sci-fi Vtuber Jean Faymas AKA Jets.
+    </div>
+    <br>
+    <table class="center">
+      <tr>
+        <td>
+          <canvas id="canvas" width="640" height="360"></canvas>
+        </td>
+        <td>
+          <div class="center">
+            <div id="status" class="center">
+              <span>Loading ...</span>
+            </div>
+            <div>
+              <p>Click-drag the viewport left/right to rotate.</p>
+            </div>
+            <div>
+              <input type="radio" id="support" name="motionButton" value="support">
+              <label for="support">Support</label>
+              <input type="radio" id="boing" name="motionButton" value="boing" checked>
+              <label for="boing">Boing</label>
+              <input type="radio" id="vibe" name="motionButton" value="vibe">
+              <label for="vibe">Vibe</label>
+              <input type="radio" id="bounce" name="motionButton" value="bounce">
+              <label for="bounce">Bounce</label>
+            </div>
+            <div class="slidecontainer">
+              <p><span id="bpmLabel"></span> bpm</p>
+              <input type="range" min="30" max="120" value="60" class="slider" id="bpmSlider">
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p>
+            A Jetpack motion sequencer web graphics thing.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p>
+            The rendering is implemented on <a href="https://developer.chrome.com/docs/web-platform/webgpu/overview">WebGPU</a> and should work in any WebGPU-capable browser.
+          </p>
+          <p>
+            Tested on the following desktop browsers:
+          </p>
+          <ul>
+            <li>Chrome <span class="mono">135.0.7049.96</span></li>
+            <li>Brave <span class="mono">1.77.100</span> (Chromium: <span class="mono">135.0.7049.100</span>)</li>
+            <li>Opera <span class="mono">118.0.5461.41</span> (Chromium: <span class="mono">133.0.6943.143</span>)</li>
+            <li>Safari <span class="mono">18.4.0</span> (with WebGPU Preview Feature Flag enabled)</li>
+            <li>Firefox Nightly <span class="mono">139.0a1 (2025-04-21)</span></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p>GIFs from the web version:</p>
+          <p class="center">
+            <img src="support.gif" alt="Support"> <img src="boing.gif" alt="Boing"><br>
+            <img src="vibe.gif" alt="Vibe"> <img src="bounce.gif" alt="Bounce"><br>
+          </p>
+          <p>Screengrabs from the desktop version:</p>
+          <p class="center">
+            <img src="jetpack1.png" width="600px" alt="Support"><br>
+            <img src="jetpack2.png" width="298px" alt="Three quarter back"> <img src="jetpack3.png" width="298px" alt="Three quarter front"><br>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <script src="core.js"></script>
+    <script async src="jetpack.js"></script>
+    <script>
+var bpmSlider = document.getElementById("bpmSlider");
+var bpmLabel = document.getElementById("bpmLabel");
+
+bpmLabel.innerHTML = bpmSlider.value;
+
+bpmSlider.oninput = function() {
+  bpmLabel.innerHTML = this.value;
+  wasm.instance.exports.setBpm(this.value);
+}
+
+function setBpm(bpm) {
+  bpmSlider.value = bpm;
+  bpmLabel.innerHTML = bpm;
+  wasm.instance.exports.setBpm(bpm);
+}
+
+var supportMotionButton = document.getElementById("support");
+supportMotionButton.onclick = function() {
+  wasm.instance.exports.queueMotion(3);
+  setBpm(60);
+}
+
+var boingMotionButton = document.getElementById("boing");
+boingMotionButton.onclick = function() {
+  wasm.instance.exports.queueMotion(1);
+  setBpm(90);
+}
+
+var vibeMotionButton = document.getElementById("vibe");
+vibeMotionButton.onclick = function() {
+  wasm.instance.exports.queueMotion(2);
+  setBpm(60);
+}
+
+var bounceMotionButton = document.getElementById("bounce");
+bounceMotionButton.onclick = function() {
+  wasm.instance.exports.queueMotion(4);
+  setBpm(120);
+}
+    </script>
+  </body>
+</html>
