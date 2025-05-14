@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en-au">
+  <head>
+    <title>Soundboard</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../../favicon-48x48.png" sizes="48x48">
+    <link rel="icon" type="image/png" href="../../favicon-180x180.png" sizes="180x180">
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+.btn {
+  font-family: "VT323", monospace;
+  background: #7C7C7C;
+  border-bottom: 6px inset rgba(0, 0, 0, 0.5);
+  border-left: 6px inset rgba(0, 0, 0, 0.5);
+  border-right: 6px inset rgba(255, 255, 255, 0.5);
+  border-top: 6px inset rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 2.2rem;
+  margin: 1rem;
+  min-width: 200px;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  width: auto;
+}
+
+.btn:focus, .btn:hover {
+  background: #BCBCBC;
+}
+
+.btn.red {
+  background: #881400;
+}
+
+.btn.red:focus, .btn.red:hover {
+  background: #A81000;
+}
+
+.btn.green {
+  background: #005800;
+}
+
+.btn.green:focus, .btn.green:hover {
+  background: #006800;
+}
+
+.btn.blue {
+  background: #0000BC;
+}
+
+.btn.blue:focus, .btn.blue:hover {
+  background: #0000FC;
+}
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      Audio soundboard with clips from <a href="https://www.twitch.tv/jeanfaymas" style="color: white">retro sci-fi Vtuber Jean Faymas AKA Jets</a>.
+    </div>
+    <br>
+    <div class="center">
+      <img src="JetsScream.png" width="100px">
+    </div>
+    <br>
+    <table class="center">
+      <tr>
+        <td>
+          <div class="center">
+            <a class="btn red" id="falling">Falling</a>
+            <br>
+            1 sample
+          </div>
+        </td>
+        <td>
+          <div class="center">
+            <a class="btn green" id="hit">Hit</a>
+            <br>
+            4 samples
+          </div>
+        </td>
+        <td>
+          <div class="center">
+            <a class="btn blue" id="balls">Balls</a>
+            <br>
+            2 samples
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="center">
+            <a class="btn green" id="sneeze">Sneeze</a>
+            <br>
+            3 samples
+          </div>
+        </td>
+        <td>
+          <div class="center">
+            <a class="btn blue" id="gundam">Gundam SFX</a>
+            <br>
+            1 sample
+          </div>
+        </td>
+        <td>
+          <div class="center">
+            <a class="btn red" id="wub">Wub</a>
+            <br>
+            3 samples
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="center">
+            <a class="btn red" id="argh">Aarrrrrggggggggghhhhhaaaagggghh</a>
+            <br>
+            1 sample
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <p class="center">
+            Sounds are randomised! Press the buttons with multiple smaples a few times!
+          </p>
+        </td>
+      </tr>
+    </table>
+    <script>
+const fallingElement = document.getElementById("falling");
+const hitElement = document.getElementById("hit");
+const ballsElement = document.getElementById("balls");
+const sneezeElement = document.getElementById("sneeze");
+const wubElement = document.getElementById("wub");
+const gundamElement = document.getElementById("gundam");
+const arghElement = document.getElementById("argh");
+
+const fallingAudio = new Audio("falling.mp3");
+const hit1Audio = new Audio("hit_1.mp3");
+const hit2Audio = new Audio("hit_2.mp3");
+const hit3Audio = new Audio("hit_3.mp3");
+const hit4Audio = new Audio("hit_4.mp3");
+const balls1Audio = new Audio("balls_1.mp3");
+const balls2Audio = new Audio("balls_2.mp3");
+const sneeze1Audio = new Audio("sneeze_1.mp3");
+const sneeze2Audio = new Audio("sneeze_2.mp3");
+const sneeze3Audio = new Audio("sneeze_3.mp3");
+const wub1Audio = new Audio("wub_1.mp3");
+const wub2Audio = new Audio("wub_2.mp3");
+const wub3Audio = new Audio("wub_3.mp3");
+const gundamAudio = new Audio("gundam.mp3");
+const arghAudio = new Audio("argh.mp3");
+
+fallingElement.onclick = function() {
+  fallingAudio.play();
+}
+
+hitElement.onclick = function() {
+  const index = Math.floor(Math.random() * 4);
+  const audios = { 0: hit1Audio, 1: hit2Audio, 2: hit3Audio, 3: hit4Audio };
+  audios[index].play();
+}
+
+ballsElement.onclick = function() {
+  const index = Math.floor(Math.random() * 2);
+  const audios = { 0: balls1Audio, 1: balls2Audio };
+  audios[index].play();
+}
+
+sneezeElement.onclick = function() {
+  const index = Math.floor(Math.random() * 3);
+  const audios = { 0: sneeze1Audio, 1: sneeze2Audio, 2: sneeze3Audio };
+  audios[index].play();
+}
+
+wubElement.onclick = function() {
+  const index = Math.floor(Math.random() * 3);
+  const audios = { 0: wub1Audio, 1: wub2Audio, 2: wub3Audio };
+  audios[index].play();
+}
+
+gundamElement.onclick = function() {
+  gundamAudio.play();
+}
+
+arghElement.onclick = function() {
+  arghAudio.play();
+}
+    </script>
+  </body>
+</html>

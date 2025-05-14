@@ -313,7 +313,6 @@ async function run(framebufferDimensions, sdfTextureDimensions, wasm, sdfShaderS
 
   const sdfTextureView = sdfTexture.createView();
 
-
   const sdfShadowTexture = device.createTexture({
     label: "SDF Shadow Texture",
     size: [ sdfTextureDimensions.width, sdfTextureDimensions.height ],
@@ -363,7 +362,7 @@ async function run(framebufferDimensions, sdfTextureDimensions, wasm, sdfShaderS
   });
 
   device.queue.writeBuffer(fixedBuffer, 0, memory.buffer, 0, wasm.instance.exports.getFixedDataSize());
-  
+
   previousTime = Date.now();
 
   async function draw(timestamp) {
